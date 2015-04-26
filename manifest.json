@@ -1,0 +1,25 @@
+{
+  "name": "BlocklyDuino Offline Editor",
+  "description": "Arduino to HTML framework for designers.",
+  "author": "@okhiroyuki",
+  "version": "1.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "33",
+  "icons": { "128": "media/icon_128.png"},
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "permissions": [
+    {"fileSystem": ["write", "retainEntries", "directory"]},
+    "storage"
+  ],
+  "file_handlers": {
+    "text": {
+      "types": [
+        "text/*"
+      ]
+    }
+  }
+}
