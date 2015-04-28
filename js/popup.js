@@ -19,12 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var languageMenu = document.getElementById('languageMenu');
   languageMenu.addEventListener('change', function(){
+    var item = {
+      'lang': languageMenu.value
+    };
+    // localStorageへ保存
+    chrome.storage.local.set(item, function(){
+      console.log('item saved.');
+    });
     chrome.runtime.reload();
   });
 
-
-  newButton = document.getElementById('new');
-  newButton.addEventListener("click", handleNewButton);
   openButton = document.getElementById('open');
   openButton.addEventListener("click", handleOpenButton);
   saveButton = document.getElementById('save');

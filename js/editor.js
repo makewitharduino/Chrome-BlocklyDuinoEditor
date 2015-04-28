@@ -1,4 +1,4 @@
-var newButton, openButton, saveButton;
+var openButton, saveButton;
 var fileEntry;
 var hasWriteAccess;
 
@@ -118,19 +118,6 @@ var onChosenFileToSave = function(theFileEntry) {
   setFile(theFileEntry, true);
   writeEditorToFile(theFileEntry);
 };
-
-function handleNewButton() {
-  discard();
-  newFile();
-}
-
-function discard(){
-  var count = Blockly.mainWorkspace.getAllBlocks().length;
-  //if (count < 2 || window.confirm('Delete all ' + count + ' blocks?')) {
-    Blockly.mainWorkspace.clear();
-    renderContent();
-  //}
-}
 
 function handleOpenButton() {
   chrome.fileSystem.chooseEntry({ type: 'openDirectory' }, onWritableFileToOpen);

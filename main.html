@@ -1,7 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta charset="utf-8">
   <title>BlocklyDuino</title>
   <script src="header.js"></script>
   <script src="js/blockly_compressed.js"></script>
@@ -16,23 +17,23 @@
   <script src="js/init.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/popup.js"></script>
-  </head>
+  <script src="js/dialog.js"></script>
+
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
 
 <body>
-  <!--select id="languageMenu" onchange="change_lang(this)"-->
-  <select id="languageMenu">
-    <option value="en">English</option>
-    <option value="ja">日本語</option>
-    <option value="ja_kids">にほんご</option>
-  </select>
-  <button id="button_sample" type="button" onclick=" location.href='http://lets.makewitharduino.com'">サンプル/Sample</button>
+  <dialog id="dialog1">
+    <h1>Confirmation</h1>
+    <div>
+      <p>Delete All Blocks?</p>
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+  </dialog>
 
-  <table height="100%" width="100%">
-    <tr>
-      <td>
-        <h1><a href="https://github.com/okhiroyuki/BlocklyDuino">BlocklyDuino</a> &gt; visual programming editor for arduino</h1>
-      </td>
-    </tr>
+  <table id="main" height="100%" width="100%">
     <tr>
       <td>
         <table id="tab" width="100%">
@@ -43,7 +44,11 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff">XML</td>
             <td class="tabmax">
-              <!--button id="discard">Discard</button-->
+              <select id="languageMenu">
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+                <option value="ja_kids">にほんご</option>
+              </select>
               <button id="new">New</button>
               <button id="open">Open</button>
               <button id="save">Save</button>
@@ -115,7 +120,7 @@
       <!--block type="lcd_lefttoright"></block-->
       <!--block type="lcd_righttoleft"></block-->
     </category>
-    <category id= "category_rgbled">
+    <category id="category_rgbled">
       <block type="rgbled_begin"></block>
       <block type="rgbled_setpixelcolor"></block>
       <block type="rgbled_custom_setpixelcolor">
@@ -213,11 +218,9 @@
     <category id="category_functions" custom="PROCEDURE"></category>
     <sep></sep>
   </xml>
-
   <div class="info">
     <label>Filename: </label><span id="title"></span>
   </div>
-
 </body>
 
 </html>

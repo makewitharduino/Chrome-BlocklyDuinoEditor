@@ -1,12 +1,14 @@
 html, body {
   height: 100%;
 }
+
 body {
   background-color: #fff;
   font-family: sans-serif;
   margin: 0;
   overflow: hidden;
 }
+
 h1 {
   font-weight: normal;
   font-size: 140%;
@@ -18,6 +20,7 @@ h1 {
 #tabRow>td {
   border: 1px solid #ccc;
 }
+
 td.tabon {
   border-bottom-color: #ddd !important;
   background-color: #ddd;
@@ -35,6 +38,7 @@ td.tabmin {
   border-left-style: none !important;
   border-right-style: none !important;
 }
+
 td.tabmax {
   border-top-style: none !important;
   border-left-style: none !important;
@@ -49,6 +53,7 @@ table {
   padding: 0;
   border: none;
 }
+
 td {
   padding: 0;
   vertical-align: top;
@@ -76,6 +81,7 @@ pre.content {
   font-family: monospace;
   overflow: scroll;
 }
+
 button {
   padding: 1px 1em;
   font-size: 90%;
@@ -92,6 +98,7 @@ button.launch {
 button:active {
   border: 1px solid blue !important;
 }
+
 button:hover {
   box-shadow: 2px 2px 5px #888;
 }
@@ -101,9 +108,7 @@ button:hover {
 }
 
 #languageMenu {
-  position: absolute;
-  top: 10;
-  right: 160;
+  padding: 1px 1em;
 }
 
 #button_sample{
@@ -112,7 +117,7 @@ button:hover {
   right: 5;
 }
 
-button#fakeload {
+button#save {
   margin-right: 5px;
 }
 

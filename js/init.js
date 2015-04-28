@@ -260,41 +260,10 @@ function getid() {
 }
 */
 
-/*
-function clipboard() {
-  var client = new ZeroClipboard(document.getElementById("copy-button"));
-  client.on("ready", function (readyEvent) {
-    client.on("aftercopy", function (event) {
-      alert("copy done");
-    });
-  });
-};
-*/
-/*
-function getParam() {
-  var categoryKey = "en";
-  var url = location.href;
-  var parameters = url.split("?");
-  if (parameters.length > 1) {
-    var params = parameters[1].split("&");
-    var paramsArray = [];
-    for (var i = 0; i < params.length; i++) {
-      var neet = params[i].split("=");
-      paramsArray.push(neet[0]);
-      paramsArray[neet[0]] = neet[1];
-    }
-    categoryKey = paramsArray["lang"];
-  }
-  return categoryKey;
-}
-*/
-
-
-function setScript() {
+function setScript(param) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.id = 'msg';
-  var param = 'en';
   script.src = filepath["msg_"+param];
 
   var options = document.getElementById('languageMenu');
@@ -303,12 +272,12 @@ function setScript() {
       options[i].selected=true;
     }
   }
+
   var firstScript = document.getElementsByTagName('head')[0].appendChild(script);
   firstScript.parentNode.insertBefore(script, firstScript);
   script.onload = function (e) {
     setCharacter();
     //loadfile();
-    //clipboard();
     init();
     //loadxml();
   }
@@ -344,5 +313,13 @@ function upload() {
 */
 
 window.onload = function () {
-  setScript();
+  var keys = [ 'lang' ];
+  // localStorageから読込
+  chrome.storage.local.get(keys, function(item){
+    if(chrome.runtime.lastError){
+      setScript("en");
+    }else{
+      setScript(item.lang);
+    }
+  });
 }
