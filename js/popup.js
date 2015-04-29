@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.runtime.reload();
   });
 
-  openButton = document.getElementById('open');
+  openButton = document.getElementById('button_open');
   openButton.addEventListener("click", handleOpenButton);
-  saveButton = document.getElementById('save');
+  saveButton = document.getElementById('button_save');
   saveButton.addEventListener("click", handleSaveButton);
   newFile();
 

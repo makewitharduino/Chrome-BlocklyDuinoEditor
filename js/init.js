@@ -71,7 +71,7 @@ function renderContent() {
     xmlTextarea.focus();
   } else if (content.id == 'content_arduino') {
     //content.innerHTML = Blockly.Arduino.workspaceToCode();
-    var arduinoTextarea = document.getElementById('textarea_arduino');
+    var arduinoTextarea = document.getElementById('content_arduino');
     arduinoTextarea.value = Blockly.Arduino.workspaceToCode();
     arduinoTextarea.focus();
   }
@@ -194,6 +194,22 @@ function setCharacter() {
   str.textContent = Blockly.Msg.ARDUINO;
   str = document.getElementById('tab_xml');
   str.textContent = Blockly.Msg.XML;
+  str = document.getElementById('button_new');
+  str.textContent = Blockly.Msg.BUTTON_NEW;
+  str = document.getElementById('button_open');
+  str.textContent = Blockly.Msg.BUTTON_OPEN;
+  str = document.getElementById('button_save');
+  str.textContent = Blockly.Msg.BUTTON_SAVE;
+  str = document.getElementById('dialog1_title');
+  str.textContent = Blockly.Msg.DIALOG1_TITLE;
+  str = document.getElementById('dialog1_yes');
+  str.textContent = Blockly.Msg.DIALOG1_YES;
+  str = document.getElementById('dialog1_no');
+  str.textContent = Blockly.Msg.DIALOG1_NO;
+  str = document.getElementById('info_filename');
+  str.textContent = Blockly.Msg.INFO_FILENAME;
+  str = document.getElementById('info_title');
+  str.innerHTML = Blockly.Msg.INFO_TITLE;
 }
 
 /*
@@ -280,6 +296,7 @@ function setScript(param) {
     //loadfile();
     init();
     //loadxml();
+    tabClick('blocks');
   }
 }
 
@@ -299,24 +316,18 @@ function getFiles() {
 }
 */
 
-function change_lang(obj){
-  var val = obj.options[obj.selectedIndex].value;
-  var loc = window.location;
-  window.location = loc.protocol + '//' + loc.host + loc.pathname + '?lang=' + val;
-}
-
-/*
-function upload() {
-  var arduinoTextarea = document.getElementById('textarea_arduino');
-  arduinoTextarea.value = Blockly.Generator.workspaceToCode('Arduino');
-}
-*/
-
 window.onload = function () {
   var keys = [ 'lang' ];
   // localStorageから読込
   chrome.storage.local.get(keys, function(item){
-    if(chrome.runtime.lastError){
+    if(!item.lang){
+      var item = {
+        'lang': 'en'
+      };
+      // localStorageへ保存
+      chrome.storage.local.set(item, function(){
+        console.log('item saved.');
+      });
       setScript("en");
     }else{
       setScript(item.lang);

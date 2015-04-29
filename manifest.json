@@ -1,8 +1,8 @@
 {
-  "name": "BlocklyDuino Offline Editor",
-  "description": "Arduino to HTML framework for designers.",
+  "name": "BlocklyDuino Editor",
+  "description": "BlocklyDuino is a web-based visual programming editor for arduino.",
   "author": "@okhiroyuki",
-  "version": "1.0",
+  "version": "1.3",
   "manifest_version": 2,
   "minimum_chrome_version": "33",
   "icons": { "128": "media/icon_128.png"},

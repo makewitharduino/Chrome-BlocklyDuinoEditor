@@ -3,17 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-  <title>BlocklyDuino</title>
   <script src="header.js"></script>
   <script src="js/blockly_compressed.js"></script>
   <script src="js/blocks_compressed.js"></script>
   <script src="js/arduino_compressed.js"></script>
   <script src="msg/js/en.js"></script>
-  <!--script src="js/Blob.js"></script-->
-  <!--script src="js/spin.js"></script-->
-  <!--script src="js/blockly_helper.js"></script-->
   <script src="js/jquery-1.11.2.min.js"></script>
-  <!--script src="js/jquery.xdomainajax.js"></script-->
   <script src="js/init.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/popup.js"></script>
@@ -25,19 +20,26 @@
 
 <body>
   <dialog id="dialog1">
-    <h1>Confirmation</h1>
-    <div>
-      <p>Delete All Blocks?</p>
-      <button id="yes">Yes</button>
-      <button id="no">No</button>
-    </div>
+      <p id="dialog1_title">Delete All Blocks?</p>
+      <button id="dialog1_yes">Yes</button>
+      <button id="dialog1_no">No</button>    </div>
+  </dialog>
+  <dialog id="dialog2" class="dialog2">
+    <form>
+      <p id="dialog2_title">Filename</p>
+      <input id="dialog2_filename" type="text"></input>
+    </form>
+    <button id="dialog2_ok">OK</button>
+    <button id="dialog2_cancel">CANCEL</button>
   </dialog>
 
-  <table id="main" height="100%" width="100%">
+  <h1 class="title">BlocklyDuino Editor</h1>
+
+  <table id="main">
     <tr>
       <td>
-        <table id="tab" width="100%">
-          <tr id="tabRow" height="1em">
+        <table id="tab">
+          <tr id="tabRow">
             <td id="tab_blocks" class="tabon">Blocks</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_arduino" class="taboff">Arduino</td>
@@ -49,22 +51,20 @@
                 <option value="ja">日本語</option>
                 <option value="ja_kids">にほんご</option>
               </select>
-              <button id="new">New</button>
-              <button id="open">Open</button>
-              <button id="save">Save</button>
+              <button id="button_new">New</button>
+              <button id="button_open">Open</button>
+              <button id="button_save">Save</button>
             </td>
           </tr>
         </table>
       </td>
     </tr>
     <tr>
-      <td height="99%" id="content_area"></td>
+      <td id="content_area"></td>
     </tr>
   </table>
   <div id="content_blocks" class="content"></div>
-  <div id="content_arduino" class="content" readonly wrap="off">
-    <textarea id="textarea_arduino"></textarea>
-  </div>
+  <textarea id="content_arduino" class="content" readonly wrap="off"></textarea>
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
@@ -219,8 +219,8 @@
     <sep></sep>
   </xml>
   <div class="info">
-    <label>Filename: </label><span id="title"></span>
+    <label id="info_filename" >Filename: </label><span id="info_title"></span>
   </div>
-</body>
+  </body>
 
 </html>

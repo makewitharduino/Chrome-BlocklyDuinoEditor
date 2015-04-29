@@ -1,27 +1,28 @@
 var openButton, saveButton;
 var fileEntry;
+var Entryflg;
 var hasWriteAccess;
 
 function errorHandler(e) {
   var msg = "";
 
   switch (e.code) {
-    case FileError.QUOTA_EXCEEDED_ERR:
+  case FileError.QUOTA_EXCEEDED_ERR:
     msg = "QUOTA_EXCEEDED_ERR";
     break;
-    case FileError.NOT_FOUND_ERR:
+  case FileError.NOT_FOUND_ERR:
     msg = "NOT_FOUND_ERR";
     break;
-    case FileError.SECURITY_ERR:
+  case FileError.SECURITY_ERR:
     msg = "SECURITY_ERR";
     break;
-    case FileError.INVALID_MODIFICATION_ERR:
+  case FileError.INVALID_MODIFICATION_ERR:
     msg = "INVALID_MODIFICATION_ERR";
     break;
-    case FileError.INVALID_STATE_ERR:
+  case FileError.INVALID_STATE_ERR:
     msg = "INVALID_STATE_ERR";
     break;
-    default:
+  default:
     msg = "Unknown Error";
     break;
   };
@@ -32,16 +33,17 @@ function errorHandler(e) {
 function handleDocumentChange(title) {
   if (title) {
     title = title.match(/[^/]+$/)[0];
-    document.getElementById("title").innerHTML = title;
+    document.getElementById("info_title").innerHTML = title;
     document.title = title;
   } else {
-    document.getElementById("title").innerHTML = "[no document loaded]";
+    document.getElementById("info_title").innerHTML = Blockly.Msg.INFO_TITLE;
   }
 }
 
 function newFile() {
   fileEntry = null;
   hasWriteAccess = false;
+  Entryflg = 0;
   handleDocumentChange(null);
 }
 
@@ -55,19 +57,19 @@ function readFileIntoEditor(theFileEntry) {
 
   //File list in directory
   var reader = theFileEntry.createReader();
-  reader.readEntries(function(entries) {
+  reader.readEntries(function (entries) {
     for (var i = 0; i < entries.length; ++i) {
-      if ( entries[i].name.indexOf('.xml') != -1) {
-        handleDocumentChange(entries[i].name.split('.')[0]+'.ino');
+      if (entries[i].name.indexOf('.xml') != -1) {
+        handleDocumentChange(entries[i].name.split('.')[0] + '.ino');
         filepath = entries[i].fullPath;
-        writeXmlContent(theFileEntry,filepath);
+        writeXmlContent(theFileEntry, filepath);
         return;
       }
     }
   }, errorHandler);
 }
 
-function writeXmlContent(theFileEntry,filepath){
+function writeXmlContent(theFileEntry, filepath) {
   var xmlTextarea = document.getElementById('content_xml');
   document.getElementById('tab_xml').className = 'tabon';
   document.getElementById('tab_blocks').className = 'taboff';
@@ -75,10 +77,10 @@ function writeXmlContent(theFileEntry,filepath){
   renderContent();
 
   //open xml file and write xml_textarea
-  theFileEntry.getFile(filepath, {}, function(fileEntry) {
-    fileEntry.file(function(file) {
+  theFileEntry.getFile(filepath, {}, function (fileEntry) {
+    fileEntry.file(function (file) {
       var reader = new FileReader();
-      reader.onloadend = function(e) {
+      reader.onloadend = function (e) {
         xmlTextarea.value = this.result;
       };
       reader.readAsText(file);
@@ -86,16 +88,18 @@ function writeXmlContent(theFileEntry,filepath){
   }, errorHandler);
 }
 
-function writeEditorToFile(theFileEntry,filename,blob) {
+function writeEditorToFile(theFileEntry, filename, blob) {
 
-  theFileEntry.getFile(filename, {create:true}, function(entry) {
-    entry.createWriter(function(writer) {
-      writer.onerror = function(e) {
+  theFileEntry.getFile(filename, {
+    create: true
+  }, function (entry) {
+    entry.createWriter(function (writer) {
+      writer.onerror = function (e) {
         console.log("Write failed: " + e.toString());
       }
       writer.truncate(blob.size);
-      writer.onwriteend = function() {
-        writer.onwriteend = function(e) {
+      writer.onwriteend = function () {
+        writer.onwriteend = function (e) {
           console.log("Write completed.");
         };
         writer.write(blob);
@@ -104,52 +108,74 @@ function writeEditorToFile(theFileEntry,filename,blob) {
   });
 }
 
-var onChosenFileToOpen = function(theFileEntry) {
+var onChosenFileToOpen = function (theFileEntry) {
   setFile(theFileEntry, false);
   readFileIntoEditor(theFileEntry);
 };
 
-var onWritableFileToOpen = function(theFileEntry) {
+var onWritableFileToOpen = function (theFileEntry) {
   setFile(theFileEntry, true);
+  Entryflg = 1;
   readFileIntoEditor(theFileEntry);
 };
 
-var onChosenFileToSave = function(theFileEntry) {
+var onChosenFileToSave = function (theFileEntry) {
   setFile(theFileEntry, true);
   writeEditorToFile(theFileEntry);
 };
 
 function handleOpenButton() {
-  chrome.fileSystem.chooseEntry({ type: 'openDirectory' }, onWritableFileToOpen);
+  chrome.fileSystem.chooseEntry({
+    type: 'openDirectory'
+  }, onWritableFileToOpen);
 }
 
 function handleSaveButton() {
   var filename;
   var blob;
   if (fileEntry && hasWriteAccess) {
-    filename = fileEntry.name+'.ino';
-    blob = new Blob([Blockly.Arduino.workspaceToCode()]);
-    writeEditorToFile(fileEntry,filename,blob);
+    if (Entryflg == 1) {
+      filename = fileEntry.name + '.ino';
+      blob = new Blob([Blockly.Arduino.workspaceToCode()]);
+      writeEditorToFile(fileEntry, filename, blob);
 
-    filename = fileEntry.name+'.xml';
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    blob = new Blob([xmlText]);
-    writeEditorToFile(fileEntry,filename,blob);
+      filename = fileEntry.name + '.xml';
+      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+      blob = new Blob([xmlText]);
+      writeEditorToFile(fileEntry, filename, blob);
+    } else {
+      filename = document.getElementById("info_title").innerHTML
+      saveFiles(filename.split('.')[0]);
+    }
   } else {
-    chrome.fileSystem.chooseEntry({type:'openDirectory'}, function(entry) {
-      chrome.fileSystem.getWritableEntry(entry, function(entry) {
-        filename = fileEntry.name+'.ino';
-        blob = new Blob([Blockly.Arduino.workspaceToCode()]);
-        writeEditorToFile(fileEntry,filename,blob);
-        handleDocumentChange(filename);
-
-        filename = fileEntry.name+'.xml';
-        var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-        var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-        blob = new Blob([xmlText]);
-        writeEditorToFile(fileEntry,filename,blob);
-      });
+    chrome.fileSystem.chooseEntry({
+      type: 'openDirectory'
+    }, function (entry) {
+      setFile(entry, true);
+      dialog2.showModal();
     });
   }
+}
+
+function saveFiles(filename) {
+  var blob;
+  Entryflg = 2;
+  chrome.fileSystem.getWritableEntry(fileEntry, function (entry) {
+    entry.getDirectory(filename, {
+      create: true
+    }, function (dirEntry) {
+      var ino_filename = filename + '.ino';
+      blob = new Blob([Blockly.Arduino.workspaceToCode()]);
+      writeEditorToFile(dirEntry, ino_filename, blob);
+      handleDocumentChange(ino_filename);
+
+      var xml_filename = filename + '.xml';
+      var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+      blob = new Blob([xmlText]);
+      writeEditorToFile(dirEntry, xml_filename, blob);
+    }, errorHandler);
+  });
+
 }

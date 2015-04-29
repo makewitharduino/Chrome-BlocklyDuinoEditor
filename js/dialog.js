@@ -1,18 +1,19 @@
 window.addEventListener("load", function (e) {
   var dialog = document.querySelector('#dialog1');
+  var dialog2 = document.querySelector('#dialog2');
 
-  document.querySelector('#new').addEventListener("click", function (evt) {
+  document.querySelector('#button_new').addEventListener("click", function (evt) {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
     if (count > 0){
-      console.log("showdialog");
       dialog.showModal();
     }
   });
 
-  document.querySelector('#yes').addEventListener("click", function (evt) {
+  document.querySelector('#dialog1_yes').addEventListener("click", function (evt) {
     dialog.close("yes");
   });
-  document.querySelector('#no').addEventListener("click", function (evt) {
+
+  document.querySelector('#dialog1_no').addEventListener("click", function (evt) {
     dialog.close("no");
   });
 
@@ -29,5 +30,29 @@ window.addEventListener("load", function (e) {
   dialog.addEventListener("cancel", function (evt) {
     dialog.close("canceled");
   });
+
+  document.querySelector('#dialog2_ok').addEventListener("click", function (evt) {
+    dialog2.close("ok");
+  });
+
+  document.querySelector('#dialog2_cancel').addEventListener("click", function (evt) {
+    dialog2.close("cancel");
+  });
+
+  dialog2.addEventListener("close", function (evt) {
+    if(dialog2.returnValue == "ok"){
+      var filename = document.querySelector('#dialog2_filename').value;
+      console.log(filename);
+      saveFiles(filename);
+    }else{
+      setFile(null, false);
+    }
+  });
+
+  // called when the user Cancels the dialog, for example by hitting the ESC key
+  dialog2.addEventListener("cancel", function (evt) {
+    dialog2.close("canceled");
+  });
+
 });
 
