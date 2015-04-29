@@ -152,8 +152,10 @@ function handleSaveButton() {
     chrome.fileSystem.chooseEntry({
       type: 'openDirectory'
     }, function (entry) {
-      setFile(entry, true);
-      dialog2.showModal();
+      if(entry){
+        setFile(entry, true);
+        dialog2.showModal();
+      }
     });
   }
 }

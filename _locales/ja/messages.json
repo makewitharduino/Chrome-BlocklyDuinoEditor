@@ -1,0 +1,8 @@
+{
+  "appName":{
+    "message": "BlocklyDuino Editor"
+  },
+  "appDesc":{
+    "message": "Scratchのようにブロックを組み合わせることでArduinoをプログラミングできるエディタです。"
+  }
+}
