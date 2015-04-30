@@ -1,6 +1,7 @@
 window.addEventListener("load", function (e) {
   var dialog = document.querySelector('#dialog1');
   var dialog2 = document.querySelector('#dialog2');
+  var dialog3 = document.querySelector('#dialog3');
 
   document.querySelector('#button_new').addEventListener("click", function (evt) {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
@@ -53,6 +54,16 @@ window.addEventListener("load", function (e) {
   dialog2.addEventListener("cancel", function (evt) {
     dialog2.close("canceled");
   });
+
+  document.querySelector('#dialog3_ok').addEventListener("click", function (evt) {
+    dialog3.close("ok");
+  });
+
+  // called when the user Cancels the dialog, for example by hitting the ESC key
+  dialog3.addEventListener("cancel", function (evt) {
+    dialog3.close("canceled");
+  });
+
 
 });
 

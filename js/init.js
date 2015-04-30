@@ -210,6 +210,10 @@ function setCharacter() {
   str.textContent = Blockly.Msg.INFO_FILENAME;
   str = document.getElementById('info_title');
   str.innerHTML = Blockly.Msg.INFO_TITLE;
+  str = document.getElementById('dialog3_title');
+  str.innerHTML = Blockly.Msg.DIALOG3_TITLE;
+  str = document.getElementById('dialog2_title');
+  str.textContent = Blockly.Msg.DIALOG2_TITLE;
 }
 
 /*

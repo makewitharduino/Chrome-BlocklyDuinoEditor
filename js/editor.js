@@ -60,6 +60,8 @@ function readFileIntoEditor(theFileEntry) {
   reader.readEntries(function (entries) {
     for (var i = 0; i < entries.length; ++i) {
       if (entries[i].name.indexOf('.xml') != -1) {
+        Entryflg = 1;
+        setFile(theFileEntry, true);
         handleDocumentChange(entries[i].name.split('.')[0] + '.ino');
         filepath = entries[i].fullPath;
         writeXmlContent(theFileEntry, filepath);
@@ -67,6 +69,7 @@ function readFileIntoEditor(theFileEntry) {
       }
     }
   }, errorHandler);
+  dialog3.showModal();
 }
 
 function writeXmlContent(theFileEntry, filepath) {
@@ -114,8 +117,6 @@ var onChosenFileToOpen = function (theFileEntry) {
 };
 
 var onWritableFileToOpen = function (theFileEntry) {
-  setFile(theFileEntry, true);
-  Entryflg = 1;
   readFileIntoEditor(theFileEntry);
 };
 
