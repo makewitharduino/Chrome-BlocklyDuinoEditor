@@ -12,3 +12,14 @@ chrome.app.runtime.onLaunched.addListener(function() {
     }
   });
 });
+
+chrome.runtime.onMessageExternal.addListener(
+  function(request, sender, sendResponse) {
+    if (request.data){
+      var url = request.data['url'];
+      chrome.runtime.sendMessage({greeting: "hello",url:url}, function(response) {
+        console.log(response.farewell);
+      });
+    }
+    var data = request.data;
+});

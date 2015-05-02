@@ -338,3 +338,29 @@ window.onload = function () {
     }
   });
 }
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "hello"){
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET",request.url,true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          // WARNING! Might be evaluating an evil script!
+          var xmlTextarea = document.getElementById('content_xml');
+          document.getElementById('tab_xml').className = 'tabon';
+          document.getElementById('tab_blocks').className = 'taboff';
+          document.getElementById('content_xml').style.visibility = 'visible';
+          renderContent();
+
+          var xml = xhr.responseText;
+          xml = xml.replace("<html><head/><body><xml>",'');
+          xml = xml.replace("</body></html>",'');
+          xml = xml;
+          xmlTextarea.value = xml;
+        }
+      }
+      xhr.send();
+      sendResponse({farewell: "goodbye"});
+    }
+  });
