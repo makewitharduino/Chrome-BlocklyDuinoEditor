@@ -3,41 +3,85 @@
 
 <head>
   <meta charset="utf-8">
-  <script src="header.js"></script>
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+  <link href="css/style.css" rel="stylesheet">
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="js/header.js"></script>
   <script src="js/blockly_compressed.js"></script>
   <script src="js/blocks_compressed.js"></script>
   <script src="js/arduino_compressed.js"></script>
   <script src="msg/js/en.js"></script>
-  <script src="js/jquery-1.11.2.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/popup.js"></script>
-  <script src="js/dialog.js"></script>
-
-  <!-- Custom CSS -->
-  <link href="css/style.css" rel="stylesheet">
+  <script src="js/my_materialize.js"></script>
 </head>
 
 <body>
-  <dialog id="dialog1">
+  <!-- Modal1 Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
       <p id="dialog1_title">Delete All Blocks?</p>
-      <button id="dialog1_yes">Yes</button>
-      <button id="dialog1_no">No</button>
-  </dialog>
-  <dialog id="dialog2" class="dialog2">
-    <form>
-      <p id="dialog2_title">Filename</p>
-      <input id="dialog2_filename" type="text">
-    </form>
-    <button id="dialog2_ok">OK</button>
-    <button id="dialog2_cancel">CANCEL</button>
-  </dialog>
-  <dialog id="dialog3">
-    <p id="dialog3_title">can't read xml file</p>
-    <button id="dialog3_ok">OK</button>
-  </dialog>
+    </div>
+    <div class="modal-footer">
+      <a id="dialog1_yes" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+      <a id="dialog1_no" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+  </div>
 
-  <h1 class="title">BlocklyDuino Editor</h1>
+  <!-- Modal2 Structure -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+     <div class="input-field">
+       <input id="dialog2_filename" type="text" class="validate">
+       <label id="dialog2_title" for="dialog2_filename">Filename</label>
+     </div>
+    </div>
+    <div class="modal-footer">
+      <a id="dialog2_ok" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+      <a id="dialog2_cancel" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">CANCEL</a>
+    </div>
+  </div>
+
+  <nav>
+    <div class="nav-wrapper blue-grey darken-4">
+      <a href="./" class="brand-logo">BlocklyDuino Editor</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="tooltipped" href="http://code.makewitharduino.com" target="_blank"  id="go-to-web" data-tooltip="I am tooltip"><i class="mdi-action-home"></i></a></li>
+        <li><a class="tooltipped" href="http://lets.makewitharduino.com" target="_blank" id="go-to-sample" data-tooltip="I am tooltip"><i class="mdi-action-receipt"></i></a></li>
+        <!-- Modal3 Trigger -->
+        <li><a class="waves-effect waves-light modal-trigger tooltipped" id="setting" href="#modal3" data-tooltip="I am tooltip"><i class="mdi-action-settings"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Modal1 Structure -->
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <form action="#">
+        <p id="dialog-lang-title">Language Setting</p>
+        <p>
+          <input class="with-gap" name="group1" type="radio" id="select-lang-en" value="en"/>
+          <label for="select-lang-en" id="label-en">English</label>
+        </p>
+        <p>
+          <input class="with-gap" name="group1" type="radio" id="select-lang-ja" value="ja"/>
+          <label for="select-lang-ja" id="label-ja">日本語</label>
+        </p>
+        <p>
+          <input class="with-gap" name="group1" type="radio" id="select-lang-ja_kids" value="ja_kids"/>
+          <label for="select-lang-ja_kids" id="label-ja-kids">にほんご</label>
+        </p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="change_lang" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+  </div>
 
   <table id="main">
     <tr>
@@ -50,14 +94,9 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff">XML</td>
             <td class="tabmax">
-              <select id="languageMenu">
-                <option value="en">English</option>
-                <option value="ja">日本語</option>
-                <option value="ja_kids">にほんご</option>
-              </select>
-              <button id="button_new">discard</button>
-              <button id="button_open">Open</button>
-              <button id="button_save">Save</button>
+              <a href="#" class="hide-link tooltipped" id="button_new" data-tooltip="I am tooltip"><i class="small mdi-navigation-refresh"></i></a>
+              <a href="#" class="hide-link tooltipped"  id="button_open" data-tooltip="I am tooltip"><i class="small mdi-file-folder-open"></i></a>
+              <a href="#" class="hide-link tooltipped" data-tooltip="I am tooltip"  id="button_save"><i class="small mdi-content-save"></i></a>
             </td>
           </tr>
         </table>

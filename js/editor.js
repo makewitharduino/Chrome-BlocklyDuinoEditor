@@ -65,11 +65,13 @@ function readFileIntoEditor(theFileEntry) {
         handleDocumentChange(entries[i].name.split('.')[0] + '.ino');
         filepath = entries[i].fullPath;
         writeXmlContent(theFileEntry, filepath);
-        return;
+      }
+      if(i == entries.length-1 && filepath == ""){
+        Materialize.toast(Blockly.Msg.DIALOG3_TITLE, 4000) // 4000 is the duration of the toast
+        newFile();
       }
     }
   }, errorHandler);
-  dialog3.showModal();
 }
 
 function writeXmlContent(theFileEntry, filepath) {
@@ -155,7 +157,7 @@ function handleSaveButton() {
     }, function (entry) {
       if(entry){
         setFile(entry, true);
-        dialog2.showModal();
+        $('#modal2').openModal();
       }
     });
   }

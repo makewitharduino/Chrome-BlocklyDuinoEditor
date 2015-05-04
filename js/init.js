@@ -153,172 +153,59 @@ function init() {
 }
 
 function setCharacter() {
-  var category;
-  category = document.getElementById('category_initializes');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_INITIALIZES);
-  category = document.getElementById('category_inout');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_INOUT);
-  category = document.getElementById('category_serial');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_SERIAL);
-  category = document.getElementById('category_logic');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_LOGIC);
-  category = document.getElementById('category_ultrasonic');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_ULTRA_SONIC);
-  category = document.getElementById('category_lcd');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_LCD);
-  category = document.getElementById('category_rgbled');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_RGBLED);
-  category = document.getElementById('category_other_sensor');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_OTHER_SENSOR);
-  category = document.getElementById('category_loops');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_LOOPS);
-  category = document.getElementById('category_time');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_TIME);
-  category = document.getElementById('category_array');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_ARRAY);
-  category = document.getElementById('category_math');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_MATH);
-  category = document.getElementById('category_text');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_TEXT);
-  category = document.getElementById('category_variables');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_VARIABLES);
-  category = document.getElementById('category_functions');
-  category.setAttribute("name", Blockly.Msg.CATEGORY_FUNCTIONS);
-  //category = document.getElementById('category_involt');
-  //category.setAttribute("name", Blockly.Msg.CATEGORY_INVOLT);
+  $('#category_initializes').attr('name',Blockly.Msg.CATEGORY_INITIALIZES);
+  $('#category_inout').attr('name',Blockly.Msg.CATEGORY_INOUT);
+  $('#category_serial').attr('name',Blockly.Msg.CATEGORY_SERIAL);
+  $('#category_logic').attr('name',Blockly.Msg.CATEGORY_LOGIC);
+  $('#category_ultrasonic').attr('name',Blockly.Msg.CATEGORY_ULTRA_SONIC);
+  $('#category_lcd').attr('name',Blockly.Msg.CATEGORY_LCD);
+  $('#category_rgbled').attr('name',Blockly.Msg.CATEGORY_RGBLED);
+  $('#category_other_sensor').attr('name',Blockly.Msg.CATEGORY_OTHER_SENSOR);
+  $('#category_loops').attr('name',Blockly.Msg.CATEGORY_LOOPS);
+  $('#category_time').attr('name',Blockly.Msg.CATEGORY_TIME);
+  $('#category_array').attr('name',Blockly.Msg.CATEGORY_ARRAY);
+  $('#category_math').attr('name',Blockly.Msg.CATEGORY_MATH);
+  $('#category_text').attr('name',Blockly.Msg.CATEGORY_TEXT);
+  $('#category_variables').attr('name',Blockly.Msg.CATEGORY_VARIABLES);
+  $('#category_functions').attr('name',Blockly.Msg.CATEGORY_FUNCTIONS);
+  //  $('#category_involt').attr('name',Blockly.Msg.CATEGORY_INVOLT);
 
-  var str;
-  str = document.getElementById('tab_blocks');
-  str.textContent = Blockly.Msg.BLOCKS;
-  str = document.getElementById('tab_arduino');
-  str.textContent = Blockly.Msg.ARDUINO;
-  str = document.getElementById('tab_xml');
-  str.textContent = Blockly.Msg.XML;
-  str = document.getElementById('button_new');
-  str.textContent = Blockly.Msg.BUTTON_NEW;
-  str = document.getElementById('button_open');
-  str.textContent = Blockly.Msg.BUTTON_OPEN;
-  str = document.getElementById('button_save');
-  str.textContent = Blockly.Msg.BUTTON_SAVE;
-  str = document.getElementById('dialog1_title');
-  str.textContent = Blockly.Msg.DIALOG1_TITLE;
-  str = document.getElementById('dialog1_yes');
-  str.textContent = Blockly.Msg.DIALOG1_YES;
-  str = document.getElementById('dialog1_no');
-  str.textContent = Blockly.Msg.DIALOG1_NO;
-  str = document.getElementById('info_filename');
-  str.textContent = Blockly.Msg.INFO_FILENAME;
-  str = document.getElementById('info_title');
-  str.innerHTML = Blockly.Msg.INFO_TITLE;
-  str = document.getElementById('dialog3_title');
-  str.innerHTML = Blockly.Msg.DIALOG3_TITLE;
-  str = document.getElementById('dialog2_title');
-  str.textContent = Blockly.Msg.DIALOG2_TITLE;
+  $("#tab_blocks").text(Blockly.Msg.BLOCKS);
+  $("#tab_arduino").text(Blockly.Msg.ARDUINO);
+  $("#tab_xml").text(Blockly.Msg.XML);
+
+  $("#go-to-web").attr("data-tooltip",Blockly.Msg.GO_TO_WEB);
+  $("#go-to-sample").attr("data-tooltip",Blockly.Msg.GO_TO_SAMPLE);
+  $("#setting").attr("data-tooltip",Blockly.Msg.SETTING);
+  $("#dialog-lang-title").text(Blockly.Msg.DIALOG_LANG_TITLE);
+
+  $("#button_new").attr("data-tooltip",Blockly.Msg.DISCARD);
+  $("#button_save").attr("data-tooltip",Blockly.Msg.SAVE_XML);
+  $("#button_open").attr("data-tooltip",Blockly.Msg.LOAD_XML);
+  $("#dialog1_title").text(Blockly.Msg.DIALOG1_TITLE);
+  $("#dialog1_yes").text(Blockly.Msg.DIALOG1_YES);
+  $("#dialog1_no").text(Blockly.Msg.DIALOG1_NO);
+  $("#info_filename").html(Blockly.Msg.INFO_FILENAME);
+  $("#info_title").html(Blockly.Msg.INFO_TITLE);
+  $("#dialog2_title").text(Blockly.Msg.DIALOG2_TITLE);
 }
-
-/*
-function loadfile() {
-  var obj1 = document.getElementById("load");
-  var obj2 = document.getElementById("content_xml");
-  obj1.addEventListener("change", function (evt) {
-    var file = evt.target.files;
-    //FileReaderの作成
-    var reader = new FileReader();
-    // 読み込み成功時に実行されるイベント
-    reader.onload = function (e) {
-      obj2.value = reader.result;
-    };
-    // 読み込みを開始する（テキスト文字列を得る）
-    reader.readAsText(file[0]);
-    alert(file[0].name + "を取得しました。");
-  }, false);
-};
-*/
-
-/*
-function loadxml(){
-  var id = getid();
-  if(typeof id === "undefined") return;
-  var pass = 'https://raw.githubusercontent.com/makewitharduino/ArduinoSample/master/' + id +'/' + id + '.xml';
-  $.ajax({
-    url: pass,
-    type: "GET",
-    dataType: 'text',
-    success: function(res) {
-      var obj = document.getElementById("content_xml");
-      var xml = res.responseText;
-      if(xml.length >0){
-        document.getElementById('tab_xml').className = 'tabon';
-        document.getElementById('tab_blocks').className = 'taboff';
-        document.getElementById('content_xml').style.visibility = 'visible';
-        renderContent();
-        xml = xml.replace("<html><head/><body><xml>",'');
-        xml = xml.replace("</body></html>",'');
-        xml = '<xml xmlns="http://www.w3.org/1999/xhtml">' + xml;
-        obj.value = xml;
-      }
-    }
-  });
-};
-
-
-function getid() {
-  var categoryKey;
-  var url = location.href;
-  var parameters = url.split("?");
-  if(parameters.length > 1){
-    var params = parameters[1].split("&");
-    var paramsArray = [];
-    for (var i = 0; i < params.length; i++) {
-      var neet = params[i].split("=");
-      paramsArray.push(neet[0]);
-      paramsArray[neet[0]] = neet[1];
-    }
-    categoryKey = paramsArray["id"];
-  }
-  return categoryKey;
-}
-*/
 
 function setScript(param) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.id = 'msg';
   script.src = filepath["msg_"+param];
-
-  var options = document.getElementById('languageMenu');
-  for(var i=0;i<options.length;i++){
-    if(options[i].value == param){
-      options[i].selected=true;
-    }
-  }
+  var str = "#select-lang-"+ param;
+  $(str).prop('checked', true);
 
   var firstScript = document.getElementsByTagName('head')[0].appendChild(script);
   firstScript.parentNode.insertBefore(script, firstScript);
   script.onload = function (e) {
     setCharacter();
-    //loadfile();
     init();
-    //loadxml();
     tabClick('blocks');
   }
 }
-
-/*
-function getFiles() {
-  // return {"sketch.ino": Blockly.Generator.workspaceToCode('Arduino') }
-  //$('textarea#textarea_arduino').val() //&lt; et &lt;
-  var code = $('textarea#textarea_arduino').val();
-
-  code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  //code=code.replace(">","&gt;");
-  //code = "<![CDATA[" + code + "]]>";
-  //document.write (code);
-  return {
-    "sketch.ino": code
-  }
-}
-*/
 
 window.onload = function () {
   var keys = [ 'lang' ];
