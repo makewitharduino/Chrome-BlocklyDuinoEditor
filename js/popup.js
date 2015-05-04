@@ -17,28 +17,22 @@ document.addEventListener('DOMContentLoaded', function() {
     tabClick('xml');
   });
 
-  var change_lang = document.getElementById('setting');
-  change_lang.addEventListener('click', function() {
+  document.querySelector('#setting').addEventListener("click", function (evt) {
     var val = $('[class="with-gap"]:checked').map(function(){
       //$(this)でjQueryオブジェクトが取得できる。val()で値をvalue値を取得。
       return $(this).val();
     }).get();
-    var keys = [ 'lang' ];
     // localStorageから読込
-    chrome.storage.local.get(keys, function(current_item){
-      if(current_item.lang != val[0]){
-        var new_item = {
-          'lang': val[0]
-        };
-        //mapの結果がjQueryオブジェクトの配列で返ってくるので、get()で生配列を取得する。
-        // localStorageへ保存
-
-        chrome.storage.local.set(new_item, function(){
-          console.log('item saved.');
-        });
-        chrome.runtime.reload();
-      }
-    });
+    if(current_lang != val[0]){
+      var new_item = {
+        'lang': val[0]
+      };
+      // localStorageへ保存
+      chrome.storage.local.set(new_item, function(){
+        console.log('item saved.');
+      });
+      chrome.runtime.reload();
+    }
   });
 
   document.querySelector('#button_new').addEventListener("click", function (evt) {

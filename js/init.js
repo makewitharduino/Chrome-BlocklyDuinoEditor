@@ -11,6 +11,8 @@ var selected = 'blocks';
 
 var chosenEntry = null;
 
+var current_lang = "";
+
 /**
  * Switch the visible pane when a tab is clicked.
  * @param {string} clickedName Name of tab clicked.
@@ -197,6 +199,7 @@ function setScript(param) {
   script.src = filepath["msg_"+param];
   var str = "#select-lang-"+ param;
   $(str).prop('checked', true);
+  current_lang = param;
 
   var firstScript = document.getElementsByTagName('head')[0].appendChild(script);
   firstScript.parentNode.insertBefore(script, firstScript);
