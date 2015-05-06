@@ -54,7 +54,7 @@
         <li><a class="tooltipped" href="http://code.makewitharduino.com" target="_blank"  id="go-to-web" data-tooltip="I am tooltip"><i class="mdi-action-home"></i></a></li>
         <li><a class="tooltipped" href="http://lets.makewitharduino.com" target="_blank" id="go-to-sample" data-tooltip="I am tooltip"><i class="mdi-action-receipt"></i></a></li>
         <!-- Modal3 Trigger -->
-        <li><a class="waves-effect waves-light modal-trigger tooltipped" href="#modal3" data-tooltip="I am tooltip"><i class="mdi-action-settings"></i></a></li>
+        <li><a class="waves-effect waves-light tooltipped" id="open-setting" data-tooltip="I am tooltip"><i class="mdi-action-settings"></i></a></li>
       </ul>
     </div>
   </nav>
@@ -76,6 +76,25 @@
           <input class="with-gap" name="group1" type="radio" id="select-lang-ja_kids" value="ja_kids"/>
           <label for="select-lang-ja_kids" id="label-ja-kids">にほんご</label>
         </p>
+        <div class="row">
+          <div class="col s4">
+              <!-- Switch -->
+              <div class="switch">
+                <p id="auto-save-title">Auto Save</p>
+                <label>
+                  Off
+                  <input id="checkbox-auto-save" type="checkbox">
+                  <span class="lever"></span>
+                  On
+                </label>
+            </div>
+          </div>
+          <div class="col s8">
+            <p class="range-field" id="range-title">interval (min)
+              <input type="range" id="save-time" min="1" max="10" />
+            </p>
+          </div>
+        </div>
       </form>
     </div>
     <div class="modal-footer">
@@ -92,7 +111,6 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_arduino" class="taboff">Arduino</td>
             <td class="tabmin">&nbsp;</td>
-            <td id="tab_xml" class="taboff">XML</td>
             <td class="tabmax">
               <a href="#" class="hide-link tooltipped" id="button_new" data-tooltip="I am tooltip"><i class="small mdi-navigation-refresh"></i></a>
               <a href="#" class="hide-link tooltipped"  id="button_open" data-tooltip="I am tooltip"><i class="small mdi-file-folder-open"></i></a>
@@ -108,7 +126,6 @@
   </table>
   <div id="content_blocks" class="content"></div>
   <textarea id="content_arduino" class="content" readonly wrap="off"></textarea>
-  <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
     <category id="category_initializes">

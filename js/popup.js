@@ -11,10 +11,23 @@ document.addEventListener('DOMContentLoaded', function() {
     tabClick('arduino');
   });
 
-  var xml = document.getElementById('tab_xml');
-  // onClick's logic below:
-  xml.addEventListener('click', function() {
-    tabClick('xml');
+  document.querySelector('#open-setting').addEventListener("click",function(evt){
+    var keys = [ 'autosave','interval' ];
+    // localStorageから読込
+    chrome.storage.local.get(keys, function(item){
+      if(!item.autosave){
+        $("#checkbox-auto-save").prop('checked',false);
+      }else{
+        if(item.autosave == 'on') $("#checkbox-auto-save").prop('checked',true);
+        else $("#checkbox-auto-save").prop('checked',false);
+      }
+      if(!item.interval){
+        $("#save-time").val("1");
+      }else{
+        $("#save-time").val(item.interval);
+      }
+    });
+    $('#modal3').openModal();
   });
 
   document.querySelector('#setting').addEventListener("click", function (evt) {
@@ -22,15 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
       //$(this)でjQueryオブジェクトが取得できる。val()で値をvalue値を取得。
       return $(this).val();
     }).get();
+    var autosave = 'off';
+    var interval = $("#save-time").val();
+    if($("#checkbox-auto-save:checked").val() == 'on'){
+      autosave = 'on';
+      chrome.alarms.create("myAlarm", {periodInMinutes: Number(interval)} );
+    }else{
+      chrome.alarms.clear("myAlarm");
+    }
     // localStorageから読込
+    var new_item = {
+      'lang': val[0],
+      'autosave': autosave,
+      'interval': interval
+    };
+    // localStorageへ保存
+    chrome.storage.local.set(new_item, function(){
+      console.log('item saved.');
+    });
     if(current_lang != val[0]){
-      var new_item = {
-        'lang': val[0]
-      };
-      // localStorageへ保存
-      chrome.storage.local.set(new_item, function(){
-        console.log('item saved.');
-      });
       chrome.runtime.reload();
     }
   });
@@ -63,5 +86,4 @@ document.addEventListener('DOMContentLoaded', function() {
   saveButton = document.getElementById('button_save');
   saveButton.addEventListener("click", handleSaveButton);
   newFile();
-
 });

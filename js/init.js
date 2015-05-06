@@ -5,7 +5,7 @@
 
 'use strict';
 
-var TABS_ = ['blocks', 'arduino', 'xml'];
+var TABS_ = ['blocks', 'arduino'];
 
 var selected = 'blocks';
 
@@ -18,27 +18,6 @@ var current_lang = "";
  * @param {string} clickedName Name of tab clicked.
  */
 function tabClick(clickedName) {
-  // If the XML tab was open, save and render the content.
-  if (document.getElementById('tab_xml').className == 'tabon') {
-    var xmlTextarea = document.getElementById('content_xml');
-    var xmlText = xmlTextarea.value;
-    var xmlDom = null;
-    try {
-      xmlDom = Blockly.Xml.textToDom(xmlText);
-    } catch (e) {
-      var q =
-        window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
-      if (!q) {
-        // Leave the user on the XML tab.
-        return;
-      }
-    }
-    if (xmlDom) {
-      Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
-    }
-  }
-
   // Deselect all tabs and hide all panes.
   for (var i = 0; i < TABS_.length; i++) {
     var name = TABS_[i];
@@ -65,12 +44,6 @@ function renderContent() {
     // If the workspace was changed by the XML tab, Firefox will have performed
     // an incomplete rendering due to Blockly being invisible.  Rerender.
     Blockly.mainWorkspace.render();
-  } else if (content.id == 'content_xml') {
-    var xmlTextarea = document.getElementById('content_xml');
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    xmlTextarea.value = xmlText;
-    xmlTextarea.focus();
   } else if (content.id == 'content_arduino') {
     //content.innerHTML = Blockly.Arduino.workspaceToCode();
     var arduinoTextarea = document.getElementById('content_arduino');
@@ -174,12 +147,14 @@ function setCharacter() {
 
   $("#tab_blocks").text(Blockly.Msg.BLOCKS);
   $("#tab_arduino").text(Blockly.Msg.ARDUINO);
-  $("#tab_xml").text(Blockly.Msg.XML);
 
   $("#go-to-web").attr("data-tooltip",Blockly.Msg.GO_TO_WEB);
   $("#go-to-sample").attr("data-tooltip",Blockly.Msg.GO_TO_SAMPLE);
-  $("#setting").attr("data-tooltip",Blockly.Msg.SETTING);
+  $("#open-setting").attr("data-tooltip",Blockly.Msg.SETTING);
   $("#dialog-lang-title").text(Blockly.Msg.DIALOG_LANG_TITLE);
+
+  $("#auto-save-title").text(Blockly.Msg.AUTO_SAVE_TITLE);
+  $("#range-title").html(Blockly.Msg.RANGE_TITLE + '<input type="range" id="save-time" min="1" max="10" />');
 
   $("#button_new").attr("data-tooltip",Blockly.Msg.DISCARD);
   $("#button_save").attr("data-tooltip",Blockly.Msg.SAVE_XML);
@@ -231,26 +206,28 @@ window.onload = function () {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if (request.greeting == "hello"){
+    if (request.method == "url"){
       var xhr = new XMLHttpRequest();
       xhr.open("GET",request.url,true);
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
           // WARNING! Might be evaluating an evil script!
-          var xmlTextarea = document.getElementById('content_xml');
-          document.getElementById('tab_xml').className = 'tabon';
-          document.getElementById('tab_blocks').className = 'taboff';
-          document.getElementById('content_xml').style.visibility = 'visible';
-          renderContent();
-
+          newFile();
+          Blockly.mainWorkspace.clear();
           var xml = xhr.responseText;
           xml = xml.replace("<html><head/><body><xml>",'');
           xml = xml.replace("</body></html>",'');
-          xml = xml;
-          xmlTextarea.value = xml;
+          var xmlDoc = Blockly.Xml.textToDom(xml);
+          Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDoc);
         }
       }
       xhr.send();
+      sendResponse({farewell: "goodbye"});
+    }else if(request.method == "autosave"){
+      if(hasWriteAccess){
+        handleSaveButton();
+        Materialize.toast(Blockly.Msg.POPUP_SAVE_DONE, 4000) // 4000 is the duration of the toast
+      }
       sendResponse({farewell: "goodbye"});
     }
   });

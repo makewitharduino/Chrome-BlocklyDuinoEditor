@@ -2,6 +2,7 @@ var openButton, saveButton;
 var fileEntry;
 var Entryflg;
 var hasWriteAccess;
+var timer1;
 
 function errorHandler(e) {
   var msg = "";
@@ -75,18 +76,16 @@ function readFileIntoEditor(theFileEntry) {
 }
 
 function writeXmlContent(theFileEntry, filepath) {
-  var xmlTextarea = document.getElementById('content_xml');
-  document.getElementById('tab_xml').className = 'tabon';
-  document.getElementById('tab_blocks').className = 'taboff';
-  document.getElementById('content_xml').style.visibility = 'visible';
-  renderContent();
+  Blockly.mainWorkspace.clear();
 
   //open xml file and write xml_textarea
   theFileEntry.getFile(filepath, {}, function (fileEntry) {
     fileEntry.file(function (file) {
       var reader = new FileReader();
       reader.onloadend = function (e) {
-        xmlTextarea.value = this.result;
+        var xmlDoc = Blockly.Xml.textToDom(this.result);
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDoc);
+        //xmlTextarea.value = this.result;
       };
       reader.readAsText(file);
     }, errorHandler);
@@ -165,6 +164,7 @@ function handleSaveButton() {
 
 function saveFiles(filename) {
   var blob;
+  console.log("savefiles");
   Entryflg = 2;
   chrome.fileSystem.getWritableEntry(fileEntry, function (entry) {
     entry.getDirectory(filename, {
@@ -182,5 +182,4 @@ function saveFiles(filename) {
       writeEditorToFile(dirEntry, xml_filename, blob);
     }, errorHandler);
   });
-
 }
