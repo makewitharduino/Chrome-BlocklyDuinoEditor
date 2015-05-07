@@ -217,6 +217,7 @@ chrome.runtime.onMessage.addListener(
           var xml = xhr.responseText;
           xml = xml.replace("<html><head/><body><xml>",'');
           xml = xml.replace("</body></html>",'');
+          console.log(xml);
           var xmlDoc = Blockly.Xml.textToDom(xml);
           Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDoc);
         }

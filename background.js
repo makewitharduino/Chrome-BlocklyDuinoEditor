@@ -15,13 +15,13 @@ chrome.app.runtime.onLaunched.addListener(function() {
 
 chrome.runtime.onMessageExternal.addListener(
   function(request, sender, sendResponse) {
-    if (request.data){
-      var url = request.data['url'];
+    console.log(request);
+    if (request.url){
+      var url = request.url;
       chrome.runtime.sendMessage({method: "url",url:url}, function(response) {
         console.log(response.farewell);
       });
     }
-    var data = request.data;
 });
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
@@ -29,3 +29,4 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
     console.log(response.farewell);
   });
 });
+

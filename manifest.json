@@ -14,7 +14,7 @@
     }
   },
   "externally_connectable": {
-    "matches": ["*://code.makewitharduino.com/*"]
+    "matches": ["*://*.makewitharduino.com/*"]
   },
   "permissions": [
     {"fileSystem": ["write", "retainEntries", "directory"]},
