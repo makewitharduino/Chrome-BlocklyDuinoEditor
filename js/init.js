@@ -224,9 +224,9 @@ chrome.runtime.onMessage.addListener(
       xhr.send();
       sendResponse({farewell: "goodbye"});
     }else if(request.method == "autosave"){
-      if(hasWriteAccess){
+      if(Entryflg != 0 && hasWriteAccess){
         handleSaveButton();
-        Materialize.toast(Blockly.Msg.POPUP_SAVE_DONE, 4000) // 4000 is the duration of the toast
+        //Materialize.toast(Blockly.Msg.POPUP_SAVE_DONE, 4000) // 4000 is the duration of the toast
       }
       sendResponse({farewell: "goodbye"});
     }

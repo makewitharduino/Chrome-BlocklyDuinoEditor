@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelector('#button_new').addEventListener("click", function (evt) {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
-    if (count > 0){
+    if (count > 0 || Entryflg != 0){
       $('#modal1').openModal();
     }
   });
@@ -74,11 +74,17 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#dialog2_ok').addEventListener("click", function (evt) {
     var filename = document.querySelector('#dialog2_filename').value;
     console.log(filename);
-    saveFiles(filename);
+    if(filename.length > 0){
+      saveFiles(filename);
+    }else{
+      setFile(null,false);
+      Materialize.toast(Blockly.Msg.ERROR_FILENAME, 4000) // 4000 is the duration of the toast
+    }
   });
 
   document.querySelector('#dialog2_cancel').addEventListener("click", function (evt) {
-    setFile(null, false);
+    console.log("dialog2_cansel");
+    setFile(null,false);
   });
 
   openButton = document.getElementById('button_open');

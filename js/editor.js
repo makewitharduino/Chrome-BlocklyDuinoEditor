@@ -67,7 +67,7 @@ function readFileIntoEditor(theFileEntry) {
         filepath = entries[i].fullPath;
         writeXmlContent(theFileEntry, filepath);
       }
-      if(i == entries.length-1 && filepath == ""){
+      if(i == entries.length-1 & filepath == ""){
         Materialize.toast(Blockly.Msg.DIALOG3_TITLE, 4000) // 4000 is the duration of the toast
         newFile();
       }
@@ -104,7 +104,9 @@ function writeEditorToFile(theFileEntry, filename, blob) {
       writer.truncate(blob.size);
       writer.onwriteend = function () {
         writer.onwriteend = function (e) {
-          console.log("Write completed.");
+          if(filename.indexOf(".xml") != -1){
+            Materialize.toast(Blockly.Msg.POPUP_SAVE_DONE, 4000) // 4000 is the duration of the toast
+          }
         };
         writer.write(blob);
       }
@@ -155,6 +157,7 @@ function handleSaveButton() {
       type: 'openDirectory'
     }, function (entry) {
       if(entry){
+        console.log(Entryflg);
         setFile(entry, true);
         $('#modal2').openModal();
       }
