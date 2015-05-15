@@ -1,4 +1,7 @@
+"user strict"
+
 document.addEventListener('DOMContentLoaded', function() {
+
   var blocks = document.getElementById('tab_blocks');
   // onClick's logic below:
   blocks.addEventListener('click', function() {
@@ -71,9 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
     newFile();
   });
 
-  document.querySelector('#dialog2_ok').addEventListener("click", function (evt) {
-    var filename = document.querySelector('#dialog2_filename').value;
-    console.log(filename);
+  document.querySelector('#dialog2_ok').addEventListener("click", function(){
+    var input = document.getElementById('dialog2_filename');
+    var filename = input.value;
+    if(false === input.checkValidity()){
+      input.value = "";
+      setFile(null,false);
+      Materialize.toast(Blockly.Msg.ERROR_FILENAME2, 4000) // 4000 is the duration of the toast
+      return;
+    }
     if(filename.length > 0){
       saveFiles(filename);
     }else{
@@ -83,8 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.querySelector('#dialog2_cancel').addEventListener("click", function (evt) {
-    console.log("dialog2_cansel");
     setFile(null,false);
+    console.log("dialog2_cansel");
   });
 
   openButton = document.getElementById('button_open');

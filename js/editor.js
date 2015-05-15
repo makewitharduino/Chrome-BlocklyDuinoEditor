@@ -157,8 +157,7 @@ function handleSaveButton() {
       type: 'openDirectory'
     }, function (entry) {
       if(entry){
-        console.log(Entryflg);
-        setFile(entry, true);
+        fileEntry = entry;
         $('#modal2').openModal();
       }
     });
@@ -168,6 +167,7 @@ function handleSaveButton() {
 function saveFiles(filename) {
   var blob;
   console.log("savefiles");
+  setFile(fileEntry,true);
   Entryflg = 2;
   chrome.fileSystem.getWritableEntry(fileEntry, function (entry) {
     entry.getDirectory(filename, {
