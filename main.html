@@ -59,7 +59,7 @@
     </div>
   </nav>
 
-  <!-- Modal1 Structure -->
+  <!-- Modal3 Structure -->
   <div id="modal3" class="modal">
     <div class="modal-content">
       <form action="#">
@@ -102,6 +102,24 @@
     </div>
   </div>
 
+  <!-- Modal4 Structure -->
+  <div id="modal4" class="modal">
+    <div class="modal-content">
+      <p id="dialog4_title">Delete All Blocks?</p>
+    </div>
+    <div class="modal-footer">
+      <a id="dialog4_yes" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+      <a id="dialog4_no" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
+  </div>
+
+  <!-- Dropdown Structure -->
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!" id="button_discard">Discard</a></li>
+    <li class="divider"></li>
+    <li><a href="#!" id="button_save_as">Save as..</a></li>
+  </ul>
+
   <table id="main">
     <tr>
       <td>
@@ -112,9 +130,11 @@
             <td id="tab_arduino" class="taboff">Arduino</td>
             <td class="tabmin">&nbsp;</td>
             <td class="tabmax">
-              <a href="#" class="hide-link tooltipped" id="button_new" data-tooltip="I am tooltip"><i class="small mdi-navigation-refresh"></i></a>
+              <a href="#" class="hide-link tooltipped" id="button_new" data-tooltip="I am tooltip"><i class="small mdi-content-create"></i></a>
               <a href="#" class="hide-link tooltipped"  id="button_open" data-tooltip="I am tooltip"><i class="small mdi-file-folder-open"></i></a>
               <a href="#" class="hide-link tooltipped" data-tooltip="I am tooltip"  id="button_save"><i class="small mdi-content-save"></i></a>
+              <!-- Dropdown Trigger -->
+              <a class="hide-link dropdown-button" href="#" data-activates="dropdown1"><i class="small mdi-navigation-arrow-drop-down"></i></a>
             </td>
           </tr>
         </table>
@@ -162,6 +182,27 @@
       <block type="serial_read"></block>
     </category>
     <sep></sep>
+    <category id="category_servo">
+      <block type="servo_write">
+        <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="servo_writeus">
+        <value name="ANGLE_US">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="servo_read"></block>
+      <block type="servo_attached"></block>
+      <block type="servo_attach"></block>
+      <block type="servo_custom_attach"></block>
+      <block type="servo_detach"></block>
+    </category>
     <category id="category_ultrasonic">
       <block type="ultrasonic_setting"></block>
       <block type="ultrasonic_maxrange"></block>

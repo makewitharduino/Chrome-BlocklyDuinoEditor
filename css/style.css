@@ -155,3 +155,7 @@ a.brand-logo{
   margin-left: 20px;
 }
 
+#dropdown1{
+  min-width: 200px;
+  margin-right: 5px;
+}

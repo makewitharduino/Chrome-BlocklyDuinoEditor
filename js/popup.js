@@ -96,9 +96,23 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("dialog2_cansel");
   });
 
-  openButton = document.getElementById('button_open');
-  openButton.addEventListener("click", handleOpenButton);
-  saveButton = document.getElementById('button_save');
-  saveButton.addEventListener("click", handleSaveButton);
+  document.querySelector('#button_discard').addEventListener("click", function (evt) {
+    var count = Blockly.mainWorkspace.getAllBlocks().length;
+    if (count > 0){
+      $('#modal4').openModal();
+    }
+  });
+
+  document.querySelector('#dialog4_yes').addEventListener("click", function (evt) {
+    Blockly.mainWorkspace.clear();
+    renderContent();
+  });
+
+  document.querySelector('#button_open').addEventListener("click", handleOpenButton);
+  document.querySelector('#button_save').addEventListener("click", handleSaveButton);
+  document.querySelector('#button_save_as').addEventListener("click", function(evt){
+    setFile(null,false);
+    handleSaveButton();
+  });
   newFile();
 });

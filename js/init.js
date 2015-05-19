@@ -132,6 +132,7 @@ function setCharacter() {
   $('#category_inout').attr('name',Blockly.Msg.CATEGORY_INOUT);
   $('#category_serial').attr('name',Blockly.Msg.CATEGORY_SERIAL);
   $('#category_logic').attr('name',Blockly.Msg.CATEGORY_LOGIC);
+  $('#category_servo').attr('name',Blockly.Msg.CATEGORY_SERVO);
   $('#category_ultrasonic').attr('name',Blockly.Msg.CATEGORY_ULTRA_SONIC);
   $('#category_lcd').attr('name',Blockly.Msg.CATEGORY_LCD);
   $('#category_rgbled').attr('name',Blockly.Msg.CATEGORY_RGBLED);
@@ -156,12 +157,17 @@ function setCharacter() {
   $("#auto-save-title").text(Blockly.Msg.AUTO_SAVE_TITLE);
   $("#range-title").html(Blockly.Msg.RANGE_TITLE + '<input type="range" id="save-time" min="1" max="10" />');
 
-  $("#button_new").attr("data-tooltip",Blockly.Msg.DISCARD);
-  $("#button_save").attr("data-tooltip",Blockly.Msg.SAVE_XML);
-  $("#button_open").attr("data-tooltip",Blockly.Msg.LOAD_XML);
+  $("#button_new").attr("data-tooltip",Blockly.Msg.BUTTON_NEW);
+  $("#button_save").attr("data-tooltip",Blockly.Msg.BUTTON_SAVE);
+  $("#button_open").attr("data-tooltip",Blockly.Msg.BUTTON_OPEN);
+  $("#button_discard").text(Blockly.Msg.DROPDOWN_DISCARD);
+  $("#button_save_as").text(Blockly.Msg.DROPDOWN_SAVE_AS);
   $("#dialog1_title").text(Blockly.Msg.DIALOG1_TITLE);
   $("#dialog1_yes").text(Blockly.Msg.DIALOG1_YES);
   $("#dialog1_no").text(Blockly.Msg.DIALOG1_NO);
+  $("#dialog4_title").text(Blockly.Msg.DIALOG4_TITLE);
+  $("#dialog4_yes").text(Blockly.Msg.DIALOG1_YES);
+  $("#dialog4_no").text(Blockly.Msg.DIALOG1_NO);
   $("#info_filename").html(Blockly.Msg.INFO_FILENAME);
   $("#info_title").html(Blockly.Msg.INFO_TITLE);
   $("#dialog2_title").text(Blockly.Msg.DIALOG2_TITLE);
