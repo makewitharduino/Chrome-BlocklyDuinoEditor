@@ -108,6 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
     renderContent();
   });
 
+  document.querySelector('#dialog_var_ok').addEventListener("click", function (evt) {
+    set_variable();
+  });
+
   document.querySelector('#button_open').addEventListener("click", handleOpenButton);
   document.querySelector('#button_save').addEventListener("click", handleSaveButton);
   document.querySelector('#button_save_as').addEventListener("click", function(evt){

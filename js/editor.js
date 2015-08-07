@@ -164,6 +164,21 @@ function handleSaveButton() {
   }
 }
 
+function set_variable(){
+  var input = document.getElementById('dialog_var_name');
+  var newVar = input.value;
+  if (newVar) {
+    newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
+    if (newVar == Blockly.Msg.RENAME_VARIABLE ||
+        newVar == Blockly.Msg.NEW_VARIABLE) {
+      // Ok, not ALL names are legal...
+    }
+    else{
+      Blockly.Variables.renameVariable(Blockly.Msg.Valiable_text, newVar, Blockly.FieldVariable_workspace);
+    }
+  }
+}
+
 function saveFiles(filename) {
   var blob;
   console.log("savefiles");
