@@ -300,6 +300,129 @@
       </block>
       <block type="rgbled_show"></block>
     </category>
+    <category id="category_i2c_matrix">
+      <block type="i2c_matrix_begin"></block>
+      <block type="i2c_matrix_clear"></block>
+      <block type ="i2c_matrix_writedisplay" ></block>
+      <block type ="i2c_matrix_setrotation" ></block>
+        <value name="COL">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="ROW">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type ="i2c_matrix_settextsize" ></block>
+      <block type ="i2c_matrix_settextwrap" ></block>
+      <block type ="i2c_matrix_settextcolor" ></block>
+      <block type="i2c_matrix_print">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="i2c_matrix_setcursor">
+      <block type ="i2c_matrix_drawpixel" >
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type ="i2c_matrix_drawline" >
+        <value name="X0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="X1">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y1">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type ="i2c_matrix_drawcircle" >
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="D">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type ="i2c_matrix_drawrect" >
+        <value name="X0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="X1">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <value name="Y1">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
+      <block type ="i2c_matrix_fillrect" >
+        <value name="X0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y0">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="X1">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <value name="Y1">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
+      </category>
     <category id="category_other_sensor">
       <block type="dht_read"></block>
     </category>
