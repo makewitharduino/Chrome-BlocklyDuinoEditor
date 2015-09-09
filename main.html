@@ -36,10 +36,10 @@
   <!-- Modal2 Structure -->
   <div id="modal2" class="modal">
     <div class="modal-content">
-     <div class="input-field">
-       <input id="dialog2_filename" type="text" class="validate" pattern="^[0-9A-Za-z]+$" required>
-       <label id="dialog2_title" for="dialog2_filename">Filename</label>
-     </div>
+      <div class="input-field">
+        <input id="dialog2_filename" type="text" class="validate" pattern="^[0-9A-Za-z]+$" required>
+        <label id="dialog2_title" for="dialog2_filename">Filename</label>
+      </div>
     </div>
     <div class="modal-footer">
       <a id="dialog2_ok" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
@@ -51,7 +51,7 @@
     <div class="nav-wrapper blue-grey darken-4">
       <a href="./" class="brand-logo">BlocklyDuino Editor</a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="tooltipped" href="http://code.makewitharduino.com" target="_blank"  id="go-to-web" data-tooltip="I am tooltip"><i class="mdi-action-home"></i></a></li>
+        <li><a class="tooltipped" href="http://code.makewitharduino.com" target="_blank" id="go-to-web" data-tooltip="I am tooltip"><i class="mdi-action-home"></i></a></li>
         <li><a class="tooltipped" href="http://lets.makewitharduino.com" target="_blank" id="go-to-sample" data-tooltip="I am tooltip"><i class="mdi-action-receipt"></i></a></li>
         <!-- Modal3 Trigger -->
         <li><a class="waves-effect waves-light tooltipped" id="open-setting" data-tooltip="I am tooltip"><i class="mdi-action-settings"></i></a></li>
@@ -65,28 +65,27 @@
       <form action="#">
         <p id="dialog-lang-title">Language Setting</p>
         <p>
-          <input class="with-gap" name="group1" type="radio" id="select-lang-en" value="en"/>
+          <input class="with-gap" name="group1" type="radio" id="select-lang-en" value="en" />
           <label for="select-lang-en" id="label-en">English</label>
         </p>
         <p>
-          <input class="with-gap" name="group1" type="radio" id="select-lang-ja" value="ja"/>
+          <input class="with-gap" name="group1" type="radio" id="select-lang-ja" value="ja" />
           <label for="select-lang-ja" id="label-ja">日本語</label>
         </p>
         <p>
-          <input class="with-gap" name="group1" type="radio" id="select-lang-ja_kids" value="ja_kids"/>
+          <input class="with-gap" name="group1" type="radio" id="select-lang-ja_kids" value="ja_kids" />
           <label for="select-lang-ja_kids" id="label-ja-kids">にほんご</label>
         </p>
         <div class="row">
           <div class="col s4">
-              <!-- Switch -->
-              <div class="switch">
-                <p id="auto-save-title">Auto Save</p>
-                <label>
-                  Off
-                  <input id="checkbox-auto-save" type="checkbox">
-                  <span class="lever"></span>
-                  On
-                </label>
+            <!-- Switch -->
+            <div class="switch">
+              <p id="auto-save-title">Auto Save</p>
+              <label>
+                Off
+                <input id="checkbox-auto-save" type="checkbox">
+                <span class="lever"></span> On
+              </label>
             </div>
           </div>
           <div class="col s8">
@@ -145,8 +144,8 @@
             <td class="tabmin">&nbsp;</td>
             <td class="tabmax">
               <a href="#" class="hide-link tooltipped" id="button_new" data-tooltip="I am tooltip"><i class="small mdi-content-create"></i></a>
-              <a href="#" class="hide-link tooltipped"  id="button_open" data-tooltip="I am tooltip"><i class="small mdi-file-folder-open"></i></a>
-              <a href="#" class="hide-link tooltipped" data-tooltip="I am tooltip"  id="button_save"><i class="small mdi-content-save"></i></a>
+              <a href="#" class="hide-link tooltipped" id="button_open" data-tooltip="I am tooltip"><i class="small mdi-file-folder-open"></i></a>
+              <a href="#" class="hide-link tooltipped" data-tooltip="I am tooltip" id="button_save"><i class="small mdi-content-save"></i></a>
               <!-- Dropdown Trigger -->
               <a class="hide-link dropdown-button" href="#" data-activates="dropdown1"><i class="small mdi-navigation-arrow-drop-down"></i></a>
             </td>
@@ -166,39 +165,45 @@
       <block type="initializes_setup"></block>
     </category>
     <category id="category_inout">
-      <block type="inout_highlow"></block>
-      <block type="inout_digitalpin"></block>
-      <block type="inout_digital_write"></block>
-      <block type="inout_custom_digital_write">
-        <value name="PIN">
-          <block type="inout_digitalpin">
-            <field name="PIN">1</field>
-          </block>
-        </value>
-        <value name="STAT">
-          <block type="inout_highlow">
-            <field name="BOOL">HIGH</field>
-          </block>
-        </value>
-      </block>
-      <block type="inout_digital_read"></block>
-      <block type="inout_analog_write">
-        <value name="NUM">
-          <block type="math_number">
-            <field name="NUM">255</field>
-          </block>
-        </value>
-      </block>
-      <block type="inout_analog_read"></block>
-      <block type="pulsein"></block>
-      <block type="tone"></block>
-      <block type="custom_tone">
-        <value name="FREQ">
-          <block type="math_number">
-            <field name="NUM">255</field>
-          </block>
-        </value>
-      </block>
+      <category id="category_digital">
+        <block type="inout_highlow"></block>
+        <block type="inout_digitalpin"></block>
+        <block type="inout_digital_write"></block>
+        <block type="inout_custom_digital_write">
+          <value name="PIN">
+            <block type="inout_digitalpin">
+              <field name="PIN">1</field>
+            </block>
+          </value>
+          <value name="STAT">
+            <block type="inout_highlow">
+              <field name="BOOL">HIGH</field>
+            </block>
+          </value>
+        </block>
+        <block type="inout_digital_read"></block>
+      </category>
+      <category id="category_analog">
+        <block type="inout_analog_write">
+          <value name="NUM">
+            <block type="math_number">
+              <field name="NUM">255</field>
+            </block>
+          </value>
+        </block>
+        <block type="inout_analog_read"></block>
+      </category>
+      <category id="category_others">
+        <block type="pulsein"></block>
+        <block type="tone"></block>
+        <block type="custom_tone">
+          <value name="FREQ">
+            <block type="math_number">
+              <field name="NUM">255</field>
+            </block>
+          </value>
+        </block>
+      </category>
     </category>
     <category id="category_serial">
       <block type="serial_available"></block>
@@ -219,43 +224,290 @@
       <block type="serial_read"></block>
       <block type="serial_byte_number"></block>
     </category>
+    <category id="category_ethernet">
+      <category id="category_ethernet_init">
+        <block type="ethernet_client_begin"></block>
+        <block type="ethernet_client_begin_dhcp"></block>
+        <block type="ethernet_localip"></block>
+      </category>
+      <category id="category_ethernet_client">
+        <block type="ethernet_connect">
+          <value name="SERVER">
+            <block type="text">
+              <field name="TEXT">www.google.com</field>
+            </block>
+          </value>
+        </block>
+        <block type="ethernet_stop"></block>
+        <block type="ethernet_connected"></block>
+        <block type="ethernet_available"></block>
+        <block type="ethernet_print">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="ethernet_println">
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="ethernet_read"></block>
+        <block type="ethernet_get_request"></block>
+        <!--block type="ethernet_post_request"></block-->
+      </category>
+    </category>
+    <sep></sep>
+    <category id="category_cloud_service">
+      <category id="category_ifttt">
+        <block type="text">
+          <field name="TEXT">maker.ifttt.com</field>
+        </block>
+        <block type="ifttt_get_url">
+          <value name="EVENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+          <value name="KEY">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+      </category>
+    </category>
     <sep></sep>
     <category name="Grove">
-      <block type="grove_led"></block>
-      <block type="grove_button"></block>
-      <block type="grove_touch"></block>
-      <block type="grove_relay"></block>
-      <!--block type="grove_tilt_switch"></block-->
-      <block type="grove_buzzer"></block>
-      <!--block type="grove_pir_motion_sensor"></block-->
-      <!--block type="grove_line_finder"></block-->
-      <!--block type="grove_rgb_led"></block-->
-      <block type="grove_light_sensor"></block>
-      <block type="grove_rotary_angle"></block>
-      <block type="grove_temporature_sensor"></block>
-      <block type="grove_sound_sensor"></block>
-      <!--block type="grove_thumb_joystick"></block-->
-      <block type="grove_rgb_lcd_begin"></block>
-      <block type="grove_rgb_lcd_print">
-        <value name="PRINT">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>
-      <block type="grove_rgb_lcd_setcolor"></block>
-      <block type="grove_rgb_lcd_setcursor"></block>
-      <block type="grove_rgb_lcd_clear"></block>
-      <!--block type="lcd_scrolldisplayright"></block-->
-      <!--block type="lcd_scrolldisplayleft"></block-->
-      <block type="grove_rgb_lcd_autoscroll"></block>
-      <block type="grove_rgb_lcd_noautoscroll"></block>
-      <!--block type="lcd_lefttoright"></block-->
-      <!--block type="lcd_righttoleft"></block-->
-      <!--block type="grove_serial_lcd_power"></block-->
-      <!--block type="grove_serial_lcd_effect"></block-->
-      <!--block type="grove_ultrasonic_ranger"></block-->
-      <!--block type="grove_motor_shield"></block-->
+      <category id="category_grove_input">
+        <block type="grove_button"></block>
+        <block type="grove_touch"></block>
+        <block type="grove_rotary_angle"></block>
+        <!--block type="grove_tilt_switch"></block-->
+        <!--block type="grove_thumb_joystick"></block-->
+      </category>
+      <category id="category_grove_output">
+        <block type="grove_led"></block>
+        <block type="grove_relay"></block>
+        <block type="grove_buzzer"></block>
+        <!--block type="grove_rgb_led"></block-->
+        <!--block type="grove_motor_shield"></block-->
+      </category>
+      <category id="category_grove_sensor">
+        <!--block type="grove_line_finder"></block-->
+        <!--block type="grove_pir_motion_sensor"></block-->
+        <block type="grove_light_sensor"></block>
+        <block type="grove_temporature_sensor"></block>
+        <block type="grove_sound_sensor"></block>
+        <!--block type="grove_ultrasonic_ranger"></block-->
+      </category>
+      <category id="category_lcd_rgb">
+        <block type="grove_rgb_lcd_begin"></block>
+        <block type="grove_rgb_lcd_print">
+          <value name="PRINT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="grove_rgb_lcd_setcolor"></block>
+        <block type="grove_rgb_lcd_setcursor"></block>
+        <block type="grove_rgb_lcd_clear"></block>
+        <!--block type="lcd_scrolldisplayright"></block-->
+        <!--block type="lcd_scrolldisplayleft"></block-->
+        <block type="grove_rgb_lcd_autoscroll"></block>
+        <block type="grove_rgb_lcd_noautoscroll"></block>
+        <!--block type="lcd_lefttoright"></block-->
+        <!--block type="lcd_righttoleft"></block-->
+        <!--block type="grove_serial_lcd_power"></block-->
+        <!--block type="grove_serial_lcd_effect"></block-->
+      </category>
+    </category>
+    <category name="Adafruit">
+      <category id="category_rgbled">
+        <block type="rgbled_begin"></block>
+        <block type="rgbled_setpixelcolor"></block>
+        <block type="rgbled_custom_setpixelcolor">
+          <value name="TARGET">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="R">
+            <block type="math_number">
+              <field name="NUM">255</field>
+            </block>
+          </value>
+          <value name="G">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="B">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="rgbled_show"></block>
+      </category>
+      <category id="category_i2c_matrix">
+        <block type="i2c_matrix_begin"></block>
+        <block type="i2c_matrix_clear"></block>
+        <block type="i2c_matrix_writedisplay"></block>
+        <block type="i2c_matrix_setcursor">
+          <value name="COL">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="ROW">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_matrix_settextsize"></block>
+        <block type="i2c_matrix_settextwrap"></block>
+        <block type="i2c_matrix_settextcolor"></block>
+        <block type="i2c_matrix_print">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_matrix_setrotation"></block>
+        <block type="i2c_matrix_drawpixel">
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_matrix_drawline">
+          <value name="X0">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y0">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="X1">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y1">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_matrix_drawcircle">
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="D">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_matrix_drawrect">
+          <value name="X0">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y0">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="X1">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+          <value name="Y1">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_matrix_fillrect">
+          <value name="X0">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y0">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="X1">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+          <value name="Y1">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+        </block>
+      </category>
+      <category id="category_i2c_sevenseg">
+        <block type="i2c_sevenseg_begin"></block>
+        <block type="i2c_sevenseg_writedisplay"></block>
+        <block type="i2c_sevenseg_print">
+          <value name="NUM">
+            <block type="math_number">
+              <field name="NUM">7777</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_sevenseg_writedigitnum">
+          <value name="NUM">
+            <block type="math_number">
+              <field name="NUM">1</field>
+            </block>
+          </value>
+          <value name="DOTS">
+            <block type="i2c_sevenseg_boolean">
+              <field name="BOOL">TRUE</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_sevenseg_drawcolon">
+          <value name="DOTS">
+            <block type="i2c_sevenseg_boolean">
+              <field name="BOOL">TRUE</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2c_sevenseg_boolean"></block>
+      </category>
     </category>
     <category id="category_servo">
       <block type="servo_write">
@@ -301,187 +553,6 @@
       <block type="lcd_noautoscroll"></block>
       <!--block type="lcd_lefttoright"></block-->
       <!--block type="lcd_righttoleft"></block-->
-    </category>
-    <category id="category_rgbled">
-      <block type="rgbled_begin"></block>
-      <block type="rgbled_setpixelcolor"></block>
-      <block type="rgbled_custom_setpixelcolor">
-        <value name="TARGET">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="R">
-          <block type="math_number">
-            <field name="NUM">255</field>
-          </block>
-        </value>
-        <value name="G">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="B">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type="rgbled_show"></block>
-    </category>
-    <category id="category_i2c_matrix">
-      <block type="i2c_matrix_begin"></block>
-      <block type="i2c_matrix_clear"></block>
-      <block type ="i2c_matrix_writedisplay" ></block>
-      <block type="i2c_matrix_setcursor">
-        <value name="COL">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="ROW">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type ="i2c_matrix_settextsize" ></block>
-      <block type ="i2c_matrix_settextwrap" ></block>
-      <block type ="i2c_matrix_settextcolor" ></block>
-      <block type="i2c_matrix_print">
-        <value name="CONTENT">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>
-      <block type ="i2c_matrix_setrotation" ></block>
-      <block type ="i2c_matrix_drawpixel" >
-        <value name="X">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="Y">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type ="i2c_matrix_drawline" >
-        <value name="X0">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="Y0">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="X1">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="Y1">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type ="i2c_matrix_drawcircle" >
-        <value name="X">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="Y">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="D">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type ="i2c_matrix_drawrect" >
-        <value name="X0">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="Y0">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="X1">
-          <block type="math_number">
-            <field name="NUM">5</field>
-          </block>
-        </value>
-        <value name="Y1">
-          <block type="math_number">
-            <field name="NUM">5</field>
-          </block>
-        </value>
-      </block>
-      <block type ="i2c_matrix_fillrect" >
-        <value name="X0">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="Y0">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="X1">
-          <block type="math_number">
-            <field name="NUM">5</field>
-          </block>
-        </value>
-        <value name="Y1">
-          <block type="math_number">
-            <field name="NUM">5</field>
-          </block>
-        </value>
-      </block>
-    </category>
-    <category id="category_i2c_sevenseg">
-      <block type="i2c_sevenseg_begin"></block>
-      <block type ="i2c_sevenseg_writedisplay" ></block>
-      <block type="i2c_sevenseg_print">
-        <value name="NUM">
-          <block type="math_number">
-            <field name="NUM">7777</field>
-          </block>
-        </value>
-      </block>
-      <block type="i2c_sevenseg_writedigitnum">
-        <value name="NUM">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-        <value name="DOTS">
-          <block type="i2c_sevenseg_boolean">
-            <field name="BOOL">TRUE</field>
-          </block>
-        </value>
-      </block>
-      <block type="i2c_sevenseg_drawcolon">
-        <value name="DOTS">
-          <block type="i2c_sevenseg_boolean">
-            <field name="BOOL">TRUE</field>
-          </block>
-        </value>
-      </block>
-      <block type="i2c_sevenseg_boolean"></block>
     </category>
     <category id="category_other_sensor">
       <block type="dht_read"></block>
@@ -553,10 +624,16 @@
     <category id="category_variables" custom="VARIABLE"></category>
     <category id="category_functions" custom="PROCEDURE"></category>
     <sep></sep>
+    <!--category id="category_involt">
+<block type="involt_directmode"></block>
+<block type="involt_chromereceive"></block>
+<block type="involt_sendvalue"></block>
+<block type="involt_receivevalue"></block>
+</category-->
   </xml>
   <div class="info">
-    <label id="info_filename" >Filename: </label><span id="info_title"></span>
+    <label id="info_filename">Filename: </label><span id="info_title"></span>
   </div>
-  </body>
+</body>
 
 </html>
