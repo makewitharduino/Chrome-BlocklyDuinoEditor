@@ -146,7 +146,6 @@ function setScript(param) {
 }
 
 window.onload = function () {
-  $("#toolbox").load("./category.html");
   var keys = [ 'lang' ];
   // localStorageから読込
   chrome.storage.local.get(keys, function(item){
