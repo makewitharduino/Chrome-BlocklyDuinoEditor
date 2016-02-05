@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.querySelector('#setting').addEventListener("click", function (evt) {
+    var checkbox = $('.filled-in:checked').map(function() {
+      return $(this).val();
+    }).get();
+    var str = checkbox.join(',');
+
     var val = $('[class="with-gap"]:checked').map(function(){
       //$(this)でjQueryオブジェクトが取得できる。val()で値をvalue値を取得。
       return $(this).val();
@@ -50,15 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var new_item = {
       'lang': val[0],
       'autosave': autosave,
-      'interval': interval
+      'interval': interval,
+      'toolboxids': str
     };
     // localStorageへ保存
     chrome.storage.local.set(new_item, function(){
       console.log('item saved.');
     });
-    if(current_lang != val[0]){
-      chrome.runtime.reload();
-    }
+    chrome.runtime.reload();
   });
 
   document.querySelector('#button_new').addEventListener("click", function (evt) {

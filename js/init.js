@@ -79,7 +79,7 @@ function getBBox_(element) {
 /**
  * Initialize Blockly.  Called on page load.
  */
-function init() {
+function buildBlocks(xmlValue) {
   //window.onbeforeunload = function() {
   //  return 'Leaving this page will result in the loss of your work.';
   //};
@@ -106,7 +106,6 @@ function init() {
   };
   window.addEventListener('resize', onresize, false);
 
-  var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('content_blocks'),{
     grid:
     {spacing: 25,
@@ -115,9 +114,10 @@ function init() {
      snap: true},
     //media: 'media/',
     media: filepath.media,
-    toolbox: toolbox});
+    toolbox: xmlValue});
 
   //auto_save_and_restore_blocks();
+  setCheckbox();
 
   //load from url parameter (single param)
   //http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
@@ -125,6 +125,46 @@ function init() {
   if (dest) {
     //load_by_url(dest);
   }
+}
+
+function init() {
+  var loadIds;
+  var base = "category_logic,category_loops,category_array,category_math,category_text,category_variables,category_functions,category_sep,category_initializes,category_inout,category_time,category_serial,category_interrupts,category_sep";
+
+  chrome.storage.local.get('toolboxids', function (value) {
+    var option = value.toolboxids;
+    // set the default toolbox if none
+    if (option === undefined || option === "") {
+      loadIds = base;
+    }else{
+      loadIds = base + ',' + option;
+    }
+    var xmlValue = '<xml id="toolbox">';
+    var xmlids = loadIds.split(",");
+    for (var i = 0; i < xmlids.length; i++) {
+      if ($('#'+xmlids[i]).length) {
+        xmlValue += $('#'+xmlids[i])[0].outerHTML;
+      }
+    }
+    xmlValue += '</xml>';
+    buildBlocks(xmlValue);
+    tabClick('blocks');
+  })
+};
+
+function setCheckbox(){
+  var option;
+
+  chrome.storage.local.get("toolboxids", function (value) {
+    option = value.toolboxids;
+    if (option === undefined || option === "") {
+      return;
+    }
+    var options = option.split(",");
+    for (var i = 0; i < options.length; i++) {
+      $('#chbox_' + options[i]).prop("checked",true);
+    }
+  })
 }
 
 function setScript(param) {
@@ -141,7 +181,6 @@ function setScript(param) {
   script.onload = function (e) {
     setCharacter();
     init();
-    tabClick('blocks');
   }
 }
 
