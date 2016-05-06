@@ -176,8 +176,41 @@
         </div>
     </div>
 
+    <!-- modal_import Structure -->
+    <div id="modal_import" class="modal">
+        <div class="modal-content">
+            <div class="input-field">
+                <textarea id="textarea_import" class="materialize-textarea"></textarea>
+                <label id="textarea_import_label" for="textarea_import">Import XML</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a id="dialog_import_ok" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+            <a id="dialog_import_cancel" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">CANCEL</a>
+        </div>
+    </div>
+
+    <!-- modal_export Structure -->
+    <div id="modal_export" class="modal">
+        <div class="modal-content">
+            <div class="input-field">
+                <textarea id="textarea_export" class="materialize-textarea"></textarea>
+                <label id="textarea_export_label" for="textarea_export">Export XML</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a id="dialog_export_ok" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+    </div>
+
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!" id="button_import">Import</a>
+        </li>
+        <li class="divider">
+        <li><a href="#!" id="button_export">Export</a>
+        </li>        
+        <li class="divider">
         <li><a href="#!" id="button_discard">Discard</a>
         </li>
         <li class="divider">

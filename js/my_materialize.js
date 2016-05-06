@@ -4,5 +4,8 @@ $(document).ready(function () {
   $('select').material_select();
   $(".button-collapse").sideNav();
   $('.tooltipped').tooltip({delay: 800});
-
+  $('#textarea_export').focus(function(){
+    $(this).select();
+  });
+  $('#textarea_import').val("");
 });

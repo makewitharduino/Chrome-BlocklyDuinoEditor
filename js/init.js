@@ -194,6 +194,7 @@ function setCharacter(){
   $("#go-to-sample").attr("data-tooltip",Blockly.Msg.GO_TO_SAMPLE);
   $("#open-setting").attr("data-tooltip",Blockly.Msg.SETTING);
   $("#dialog-lang-title").text(Blockly.Msg.DIALOG_LANG_TITLE);
+  $("#dialog-block-title").text(Blockly.Msg.DIALOG_BLOCK_TITLE);
 
   $("#auto-save-title").text(Blockly.Msg.AUTO_SAVE_TITLE);
   $("#range-title").html(Blockly.Msg.RANGE_TITLE + '<input type="range" id="save-time" min="1" max="10" />');
@@ -212,6 +213,31 @@ function setCharacter(){
   $("#info_filename").html(Blockly.Msg.INFO_FILENAME);
   $("#info_title").html(Blockly.Msg.INFO_TITLE);
   $("#dialog2_title").text(Blockly.Msg.DIALOG2_TITLE);
+   
+  $("#button_import").text(Blockly.Msg.BUTTON_IMPORT);
+  $("#button_export").text(Blockly.Msg.BUTTON_EXPORT);
+  $('#textarea_import_label').text(Blockly.Msg.TEXTAREA_IMPORT_LABEL);
+  $('#textarea_export_label').text(Blockly.Msg.TEXTAREA_EXPORT_LABEL);
+  $('#dialog_import_ok').text(Blockly.Msg.DIALOG_IMPORT_OK);
+  $('#dialog_import_cancel').text(Blockly.Msg.DIALOG_IMPORT_CANCEL);
+  $('#dialog_export_ok').text(Blockly.Msg.DIALOG_EXPORT_OK);
+}
+
+function export_xml(){
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var data = Blockly.Xml.domToText(xml);
+  data = data.replace(/\r?\n/g,'');
+  $('#textarea_export').val(data);
+  $('#textarea_export').trigger('autoresize');
+  $('#modal_export').openModal();
+}
+
+function import_xml(){
+  var xml = $('#textarea_import').val();
+  $('#textarea_import').val("");
+  var xmlDoc = Blockly.Xml.textToDom(xml);
+  // Blockly.mainWorkspace.clear();
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDoc);
 }
 
 window.onload = function () {
@@ -231,7 +257,7 @@ window.onload = function () {
       setScript(item.lang);
     }
   });
-}
+};
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
@@ -259,4 +285,4 @@ chrome.runtime.onMessage.addListener(
       }
       sendResponse({farewell: "goodbye"});
     }
-  });
+});
